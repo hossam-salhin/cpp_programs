@@ -135,7 +135,7 @@ int main()
             continue;
         }
 
-        ccalculator::CalcResult res = calculator::compute(operation, num1, num2);
+        calculator::CalcResult res = calculator::compute(operation, num1, num2);
         std::cout << "Result: " << res.result << std::endl;
         calculator::logToFile(calculator::INFO, "operation: " + res.operation + 
             "\ninputs: " + std::to_string(res.num1) + 
