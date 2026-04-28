@@ -76,25 +76,25 @@ namespace calculator
         return num1 / num2;
     }
 
-    int compute(char operation, int num1, int num2)
+    CalcResult compute(char operation, int num1, int num2)
     {
+        CalcResult res;
+        res.num1 = num1;
+        res.num2 = num2;
+        res.operation = std::string(1, operation);
+
         switch(operation)
         {
-            case '+':
-                return add(num1, num2);
-            case '-':
-                return subtract(num1, num2);
-            case '*':
-                return multiply(num1, num2);
-            case '/':
-                return divide(num1, num2);
-
+            case '+': res.result = add(num1, num2); break;
+            case '-': res.result = subtract(num1, num2); break;
+            case '*': res.result = multiply(num1, num2); break;
+            case '/': res.result = divide(num1, num2); break;
             default:
-                std::cout << "Invalid operation. Please enter a valid operator." << std::endl;
+                std::cout << "Invalid operation." << std::endl;
                 logToFile(ERROR, "invalid operation: " + std::string(1, operation));
-                return 0;
+                res.result = 0;
         }
-
+        return res;
     }
 
     
@@ -135,10 +135,12 @@ int main()
             continue;
         }
 
-        int result = calculator::compute(operation, num1, num2);
-        std::cout << "Result: " << result << std::endl;
-        calculator::logToFile(calculator::INFO, "operation: " + std::string(1, operation) + "\ninputs: " + std::to_string(num1) + " and " + std::to_string(num2) + "\nresult: " + std::to_string(result));
-
+        ccalculator::CalcResult res = calculator::compute(operation, num1, num2);
+        std::cout << "Result: " << res.result << std::endl;
+        calculator::logToFile(calculator::INFO, "operation: " + res.operation + 
+            "\ninputs: " + std::to_string(res.num1) + 
+            " and " + std::to_string(res.num2) + 
+            "\nresult: " + std::to_string(res.result));
         std::cout << "Do you want to perform another calculation? (y/n): ";  // ask the user if they want to perform another calculation, and validate the input to ensure it is either 'y' or 'n'
         char choice;
         while(true)  // loop to validate the user's input for whether they want to perform another calculation, ensuring that it is either 'y' or 'n'
