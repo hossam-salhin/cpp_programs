@@ -7,10 +7,10 @@ Robot::Robot(): position{0.0 , 0.0}, totalDistance(0.0) {}
 
 void Robot::move(const std::string &direction, double distance)
 {
-    if(direction == "n") { position.y += distance;}
-    else if (direction == "s") { position.y -= distance;}
-    else if (direction == "e") { position.x += distance;}
-    else if (direction == "w") { position.x -= distance;}
+    if(direction == "n") { position.y += distance;  totalDistance += distance;}
+    else if (direction == "s") { position.y -= distance;  totalDistance += distance;}
+    else if (direction == "e") { position.x += distance;  totalDistance += distance;}
+    else if (direction == "w") { position.x -= distance;  totalDistance += distance;}
 }
 
 Position Robot::getPosition() const

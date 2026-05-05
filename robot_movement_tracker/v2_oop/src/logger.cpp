@@ -1,11 +1,15 @@
 #include "logger.h"
 #include <fstream>
+#include <iostream>
 #include <ctime>
 
 void Logger::log(logLevel level, const Movement &movement)
 {
     std::ofstream logFile(this->logPath, std::ios_base::app);
-    if(!logFile.is_open()) { return;}
+    if(!logFile.is_open()) { 
+        std::cout << "Fail to open the logger file!\n"; 
+        return;
+    }
     time_t now = time(0);
     std::string timeStr = ctime(&now);
     timeStr.pop_back();
