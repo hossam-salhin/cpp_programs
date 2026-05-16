@@ -20,7 +20,7 @@ Position Robot::getPosition() const
 
 double Robot::getTotalDistance() const
 {
-    return totalDistance;
+    return totalDistance; 
 }
 
 double Robot::getDisplacement() const
